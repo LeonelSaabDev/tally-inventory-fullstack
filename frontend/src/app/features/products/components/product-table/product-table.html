@@ -1,0 +1,28 @@
+@if (products().length === 0) {
+  <p class="empty">No products found.</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Brand</th>
+        <th class="numeric">Price</th>
+        <th class="numeric">Stock</th>
+        <th><span class="visually-hidden">Actions</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products(); track product.id) {
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.brand }}</td>
+          <td class="numeric">{{ product.price | number: '1.2-2' }}</td>
+          <td class="numeric">{{ product.stock }}</td>
+          <td class="actions">
+            <button type="button" class="danger" (click)="delete.emit(product)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

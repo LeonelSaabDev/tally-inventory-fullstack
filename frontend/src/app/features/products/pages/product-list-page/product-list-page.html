@@ -1,0 +1,26 @@
+<section class="page">
+  <header class="page-header">
+    <h1>Products</h1>
+  </header>
+
+  <form class="search" (submit)="$event.preventDefault(); search(searchInput.value)">
+    <input
+      #searchInput
+      type="search"
+      placeholder="Search by name or brand"
+      aria-label="Search products"
+    />
+    <button type="submit">Search</button>
+  </form>
+
+  @if (products.error()) {
+    <div class="error" role="alert">
+      <p>The products could not be loaded. Is the API running?</p>
+      <button type="button" (click)="products.reload()">Retry</button>
+    </div>
+  } @else if (products.hasValue()) {
+    <app-product-table [products]="products.value()" (delete)="deleteProduct($event)" />
+  } @else {
+    <p class="loading">Loading products...</p>
+  }
+</section>
