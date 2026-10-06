@@ -1,6 +1,7 @@
 <section class="page">
   <header class="page-header">
     <h1>Products</h1>
+    <a class="button" routerLink="/products/new">New product</a>
   </header>
 
   <form class="search" (submit)="$event.preventDefault(); search(searchInput.value)">
@@ -19,7 +20,7 @@
       <button type="button" (click)="products.reload()">Retry</button>
     </div>
   } @else if (products.hasValue()) {
-    <app-product-table [products]="products.value()" (delete)="deleteProduct($event)" />
+    <app-product-table [products]="products.value()" (edit)="editProduct($event)" (delete)="deleteProduct($event)" />
   } @else {
     <p class="loading">Loading products...</p>
   }

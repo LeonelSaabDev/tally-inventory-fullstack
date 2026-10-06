@@ -1,0 +1,27 @@
+<section class="page">
+  <header class="page-header">
+    <h1>{{ isEditMode() ? 'Edit product' : 'New product' }}</h1>
+  </header>
+
+  @if (serverError(); as message) {
+    <div class="error" role="alert">{{ message }}</div>
+  }
+
+  @if (!isEditMode()) {
+    <app-product-form [saving]="saving()" (save)="save($event)" (cancel)="cancel()" />
+  } @else if (product.error()) {
+    <div class="error" role="alert">
+      <p>The product could not be loaded. It may have been deleted.</p>
+      <button type="button" (click)="cancel()">Back to products</button>
+    </div>
+  } @else if (product.hasValue()) {
+    <app-product-form
+      [product]="product.value()"
+      [saving]="saving()"
+      (save)="save($event)"
+      (cancel)="cancel()"
+    />
+  } @else {
+    <p class="loading">Loading product...</p>
+  }
+</section>

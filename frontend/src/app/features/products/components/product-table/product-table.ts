@@ -10,5 +10,6 @@ import { Product } from "../../data-access/product.model";
 })
 export class ProductTable {
   readonly products = input.required<Product[]>();
+  readonly edit = output<Product>();
   readonly delete = output<Product>();
 }

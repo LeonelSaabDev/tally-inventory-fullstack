@@ -6,6 +6,7 @@ import {
 import { TestBed } from "@angular/core/testing";
 import { Product } from "../../data-access/product.model";
 import { ProductListPage } from "./product-list-page";
+import { provideRouter } from "@angular/router";
 
 describe("ProductListPage", () => {
   let httpTesting: HttpTestingController;
@@ -13,7 +14,11 @@ describe("ProductListPage", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProductListPage],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
+      ],
     }).compileComponents();
 
     httpTesting = TestBed.inject(HttpTestingController);

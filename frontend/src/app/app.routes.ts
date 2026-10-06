@@ -9,5 +9,19 @@ export const routes: Routes = [
         (m) => m.ProductListPage,
       ),
   },
+  {
+    path: "products/new",
+    loadComponent: () =>
+      import("./features/products/pages/product-form-page/product-form-page").then(
+        (m) => m.ProductFormPage,
+      ),
+  },
+  {
+    path: "products/:id/edit",
+    loadComponent: () =>
+      import("./features/products/pages/product-form-page/product-form-page").then(
+        (m) => m.ProductFormPage,
+      ),
+  },
   { path: "**", redirectTo: "products" },
 ];

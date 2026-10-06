@@ -25,3 +25,7 @@ th {
   text-align: center;
   color: #6b7280;
 }
+
+.actions button + button {
+  margin-left: 0.5rem;
+}
