@@ -1,6 +1,58 @@
-@Products.Api_HostAddress = http://localhost:5257
+@baseUrl = http://localhost:5257/api/products
+@productId = PASTE-AN-ID-HERE
 
-GET {{Products.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### List all products
+GET {{baseUrl}}
 
-###
+### Search by name or brand
+GET {{baseUrl}}?search=coca
+
+### Create a product
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Coca Cola 1.5L",
+  "brand": "Coca Cola",
+  "price": 2500,
+  "stock": 10
+}
+
+### Create another product
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Pepsi 2L",
+  "brand": "Pepsi",
+  "price": 2300,
+  "stock": 5
+}
+
+### Get by id
+GET {{baseUrl}}/{{productId}}
+
+### Update
+PUT {{baseUrl}}/{{productId}}
+Content-Type: application/json
+
+{
+  "name": "Coca Cola 2.25L",
+  "brand": "Coca Cola",
+  "price": 3200,
+  "stock": 8
+}
+
+### Invalid: price must be greater than zero (expect 400)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Invalid product",
+  "brand": "Test",
+  "price": 0,
+  "stock": 1
+}
+
+### Delete
+DELETE {{baseUrl}}/{{productId}}
