@@ -1,0 +1,18 @@
+<dl class="stats">
+  <div class="stat">
+    <dt>Products</dt>
+    <dd>{{ totalProducts() }}</dd>
+  </div>
+  <div class="stat">
+    <dt>Units in stock</dt>
+    <dd>{{ totalUnits() | number }}</dd>
+  </div>
+  <div class="stat">
+    <dt>Inventory value</dt>
+    <dd>{{ inventoryValue() | number: '1.0-0' }}</dd>
+  </div>
+  <div class="stat" [class.stat--alert]="needsAttention() > 0">
+    <dt>Low or out of stock</dt>
+    <dd>{{ needsAttention() }}</dd>
+  </div>
+</dl>

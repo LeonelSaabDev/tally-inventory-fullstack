@@ -1,12 +1,13 @@
 import { Component, inject, signal } from "@angular/core";
 import { rxResource } from "@angular/core/rxjs-interop";
+import { ProductStats } from "../../components/product-stats/product-stats";
 import { ProductTable } from "../../components/product-table/product-table";
 import { Product } from "../../data-access/product.model";
 import { ProductsApi } from "../../data-access/products-api";
 import { Router, RouterLink } from "@angular/router";
 
 @Component({
-  imports: [ProductTable, RouterLink],
+  imports: [ProductStats, ProductTable, RouterLink],
   selector: "app-product-list-page",
   styleUrl: "./product-list-page.css",
   templateUrl: "./product-list-page.html",

@@ -1,13 +1,13 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, computed, inject, input, signal } from "@angular/core";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { ProductForm } from "../../components/product-form/product-form";
 import { ProductRequest } from "../../data-access/product.model";
 import { ProductsApi } from "../../data-access/products-api";
 
 @Component({
-  imports: [ProductForm],
+  imports: [ProductForm, RouterLink],
   selector: "app-product-form-page",
   styleUrl: "./product-form-page.css",
   templateUrl: "./product-form-page.html",

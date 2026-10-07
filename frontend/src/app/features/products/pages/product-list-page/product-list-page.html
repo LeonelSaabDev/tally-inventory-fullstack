@@ -1,27 +1,53 @@
 <section class="page">
   <header class="page-header">
-    <h1>Products</h1>
-    <a class="button" routerLink="/products/new">New product</a>
+    <div>
+      <p class="eyebrow">Inventory</p>
+      <h1>Products</h1>
+    </div>
+    <a class="btn" routerLink="/products/new">
+      <span aria-hidden="true">+</span> New product
+    </a>
   </header>
 
+  @if (products.hasValue()) {
+    <app-product-stats [products]="products.value()" />
+  }
+
   <form class="search" (submit)="$event.preventDefault(); search(searchInput.value)">
+    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </svg>
     <input
       #searchInput
       type="search"
       placeholder="Search by name or brand"
       aria-label="Search products"
     />
-    <button type="submit">Search</button>
+    <button type="submit" class="btn secondary">Search</button>
   </form>
 
-  @if (products.error()) {
-    <div class="error" role="alert">
-      <p>The products could not be loaded. Is the API running?</p>
-      <button type="button" (click)="products.reload()">Retry</button>
-    </div>
-  } @else if (products.hasValue()) {
-    <app-product-table [products]="products.value()" (edit)="editProduct($event)" (delete)="deleteProduct($event)" />
-  } @else {
-    <p class="loading">Loading products...</p>
-  }
+  <div class="card">
+    @if (products.error()) {
+      <div class="state">
+        <div class="alert" role="alert">
+          <p>The products could not be loaded. Is the API running?</p>
+          <button type="button" class="btn secondary" (click)="products.reload()">Retry</button>
+        </div>
+      </div>
+    } @else if (products.hasValue()) {
+      <app-product-table
+        [products]="products.value()"
+        (edit)="editProduct($event)"
+        (delete)="deleteProduct($event)"
+      />
+    } @else {
+      <div class="state" aria-busy="true">
+        <span class="visually-hidden">Loading products...</span>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      </div>
+    }
+  </div>
 </section>

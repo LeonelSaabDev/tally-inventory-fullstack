@@ -1,27 +1,40 @@
-<section class="page">
-  <header class="page-header">
+<section class="page layout">
+  <aside class="intro">
+    <a class="back" routerLink="/products"><span aria-hidden="true">←</span> All products</a>
+    <p class="eyebrow">{{ isEditMode() ? 'Editing' : 'Create' }}</p>
     <h1>{{ isEditMode() ? 'Edit product' : 'New product' }}</h1>
-  </header>
+    <p class="lead">
+      {{
+        isEditMode()
+          ? 'Update the details and save. Changes apply immediately.'
+          : 'Add a product to your inventory. All fields are required.'
+      }}
+    </p>
+  </aside>
 
-  @if (serverError(); as message) {
-    <div class="error" role="alert">{{ message }}</div>
-  }
+  <div class="card panel">
+    @if (serverError(); as message) {
+      <div class="alert" role="alert">
+        <p>{{ message }}</p>
+      </div>
+    }
 
-  @if (!isEditMode()) {
-    <app-product-form [saving]="saving()" (save)="save($event)" (cancel)="cancel()" />
-  } @else if (product.error()) {
-    <div class="error" role="alert">
-      <p>The product could not be loaded. It may have been deleted.</p>
-      <button type="button" (click)="cancel()">Back to products</button>
-    </div>
-  } @else if (product.hasValue()) {
-    <app-product-form
-      [product]="product.value()"
-      [saving]="saving()"
-      (save)="save($event)"
-      (cancel)="cancel()"
-    />
-  } @else {
-    <p class="loading">Loading product...</p>
-  }
+    @if (!isEditMode()) {
+      <app-product-form [saving]="saving()" (save)="save($event)" (cancel)="cancel()" />
+    } @else if (product.error()) {
+      <div class="alert" role="alert">
+        <p>The product could not be loaded. It may have been deleted.</p>
+        <button type="button" class="btn secondary" (click)="cancel()">Back to products</button>
+      </div>
+    } @else if (product.hasValue()) {
+      <app-product-form
+        [product]="product.value()"
+        [saving]="saving()"
+        (save)="save($event)"
+        (cancel)="cancel()"
+      />
+    } @else {
+      <p class="loading">Loading product...</p>
+    }
+  </div>
 </section>

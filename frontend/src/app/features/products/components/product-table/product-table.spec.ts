@@ -47,4 +47,15 @@ describe("ProductTable", () => {
 
     expect(deleted).toEqual(product);
   });
+
+  it("should flag low and out of stock products", async () => {
+    fixture.componentRef.setInput("products", [
+      { ...product, id: "2", stock: 3 },
+      { ...product, id: "3", stock: 0 },
+    ]);
+    await fixture.whenStable();
+
+    expect(fixture.nativeElement.querySelector(".stock--low").textContent).toContain("Low");
+    expect(fixture.nativeElement.querySelector(".stock--out").textContent).toContain("Out of stock");
+  });
 });
